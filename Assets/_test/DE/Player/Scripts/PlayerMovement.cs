@@ -1,29 +1,31 @@
+using System;
 using UnityEngine;
-using System.Collections;
+using Random = UnityEngine.Random;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float swayRange = 0.0f;
     private bool _isGrounded;
     private Rigidbody _rigidbody;
 
-    [Header("Timer")]
-    private float _timer;
-    [SerializeField] private float forwardTimer;
-
+    [SerializeField] private Timer _timer;
+    [SerializeField] private Road _road;
+    
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _timer.OnStateChangedAction += ChangePlayerMovement;
     }
-
+    
     void Update()
     {
-        Timer();
         Movement();
     }
+
+    #region Movement
     private void Movement()
     {
         var horizontalInput = Input.GetAxis("Horizontal");
@@ -43,25 +45,29 @@ public class PlayerMovement : MonoBehaviour
         _isGrounded = false;
     }
     
+
+    
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Road"))
         {
             _isGrounded = true;
         }
     }
 
-    private void Timer()
+    private void OnTriggerEnter(Collider other)
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (other.gameObject.CompareTag("RoadSpawner"))
         {
-            _timer += Time.deltaTime;
-            forwardTimer = (int)_timer % 60;
+            _road.SpawnRoad(other);
         }
-        else
-        {
-            forwardTimer = 0;
-        }
+    }
+
+    #endregion
+    
+    private void ChangePlayerMovement(int state)
+    {
+        swayRange = state;
     }
     
     
