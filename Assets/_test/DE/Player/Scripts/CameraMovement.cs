@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    private Vector3 _cameraOffset;
-    private void Start()
-    {
-        _cameraOffset = transform.position - player.position;
-    }
-
+    [SerializeField] private vThirdPersonCamera _vThirdPersonCamera;
     private void LateUpdate()
     {
-        transform.position = player.position + _cameraOffset;
+        // Stop following player
+        if (transform.position.y < GameManager.Instance.DeathHeight)
+        {
+            _vThirdPersonCamera.enabled = false;
+        }
     }
 }

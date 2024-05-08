@@ -44,7 +44,7 @@ public class Timer : MonoBehaviour
 
     private void GameTimer()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W))
         {
             // Start Timer
             _timer += Time.deltaTime;
