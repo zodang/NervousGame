@@ -24,12 +24,16 @@ public class AudioManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         // Create a new GameObject with an AudioSource component for playing audio
         GameObject audioPlayer = new GameObject("AudioPlayer");
         audioSource = audioPlayer.AddComponent<AudioSource>();
         DontDestroyOnLoad(audioPlayer);
+
+        // Configure the audio source
+        audioSource.loop = true;
     }
 
     // Play a sound effect by index
@@ -50,10 +54,9 @@ public class AudioManager : MonoBehaviour
     {
         if (index >= 0 && index < musicClips.Length)
         {
-            audioSource.clip = musicClips[0];
+            audioSource.clip = musicClips[0]; // Use the specified index here
             audioSource.volume = musicVolume;
             audioSource.Play();
-            
         }
         else
         {

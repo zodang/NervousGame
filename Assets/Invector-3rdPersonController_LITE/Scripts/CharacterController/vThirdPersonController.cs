@@ -117,6 +117,7 @@ namespace Invector.vCharacterController
             // trigger jump behaviour
             jumpCounter = jumpTimer;
             isJumping = true;
+            AudioManager.instance.PlaySFX(2);
 
             // trigger jump animations
             if (input.sqrMagnitude < 0.1f)

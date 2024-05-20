@@ -24,7 +24,21 @@ public class Timer : MonoBehaviour
     }
     
     public event Action<int> OnStateChangedAction;
+
+    [Header("Gauge")]
+    private float _swayGauge;
+    public float swayGauge
+    {
+        get { return _swayGauge; }
+        set
+        {
+            _swayGauge = value;
+            OnGaugeChangedAction?.Invoke(_swayGauge);
+        }
+    }
     
+    public event Action<float> OnGaugeChangedAction;
+
     private void Awake()
     {
         if (Instance == null)
@@ -51,7 +65,10 @@ public class Timer : MonoBehaviour
             _timerCycle += Time.deltaTime;
             
             forwardTimer = (int)_timer % 60;
-            
+
+            // Increase the sway gauge based on how long the key is pressed
+            swayGauge += Time.deltaTime * 5; // Increase multiplier to make it spin faster
+
             if (_timerCycle >= cycle)
             {
                 Debug.Log($"@@DE ---> {cycle} Seconds elapsed");
@@ -64,6 +81,7 @@ public class Timer : MonoBehaviour
             // Stop Timer
             _timer = 0;
             currentState = 0;
+            swayGauge = 0; // Reset the sway gauge when the key is released
         }
     }
 }
