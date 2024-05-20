@@ -7,9 +7,10 @@ using Enums;
 public class UIController : MonoBehaviour
 {
     private GameManager _gameManager;
+    private int highScore = 0;
 
     [Header("GameStartPane")]
-    [SerializeField] private GameObject gameStartPanel;
+    //[SerializeField] private GameObject gameStartPanel;
     [SerializeField] private Button startBtn;
 
     [Header("GamePlayPane")]
@@ -19,7 +20,9 @@ public class UIController : MonoBehaviour
     [Header("GameOverPane")]
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private Button restartBtn;
+    [SerializeField] private Button quitBtn;
     [SerializeField] private TMP_Text finalCoinCountText;
+    [SerializeField] private TMP_Text highScoreText;
 
     
 
@@ -29,14 +32,15 @@ public class UIController : MonoBehaviour
         
         switch (state)
         {
-            case GameState.GameStart:
+            /*case GameState.GameStart:
                 gameStartPanel.SetActive(true);
-                break;
+                break;*/
             case GameState.GamePlay:
                 gamePlayPanel.SetActive(true);
                 break;
             case GameState.GameOver:
                 ChangeCoinText();
+                UpdateHighScoreText();
                 gameOverPanel.SetActive(true);
                 break;
         }
@@ -44,7 +48,7 @@ public class UIController : MonoBehaviour
 
     private void TurnOffAllPanel()
     {
-        gameStartPanel.SetActive(false);
+        //gameStartPanel.SetActive(false);
         gamePlayPanel.SetActive(false);
         gameOverPanel.SetActive(false);
     }
@@ -52,8 +56,10 @@ public class UIController : MonoBehaviour
     public void InitUI()
     {
         ChangeUIPanel(GameState.GameStart);
-        startBtn.onClick.AddListener(OnClickStartBtn);
+        quitBtn.onClick.AddListener(OnClickQuitBtn);
         restartBtn.onClick.AddListener(OnClickRestartBtn);
+        OnClickStartBtn();
+        highScore = PlayerPrefs.GetInt("HighScore", 0); 
     }
 
     private void OnClickStartBtn()
@@ -69,7 +75,23 @@ public class UIController : MonoBehaviour
 
     public void ChangeCoinText()
     {
-        coinCountText.text = $"Score : {GameManager.Instance.CoinCount}";
+        coinCountText.text = $"Score: {GameManager.Instance.CoinCount}";
         finalCoinCountText.text = coinCountText.text;
+
+        // Update high score if the current score is higher
+        if (GameManager.Instance.CoinCount > highScore)
+        {
+            highScore = GameManager.Instance.CoinCount;
+            PlayerPrefs.SetInt("HighScore", highScore); // Save high score to player preferences
+            UpdateHighScoreText(); // Update high score text
+        }
+    }
+    private void UpdateHighScoreText()
+    {
+        highScoreText.text = $"High Score: {highScore}";
+    }
+    private void OnClickQuitBtn()
+    {
+        Application.Quit(); // Quit the application
     }
 }

@@ -29,6 +29,7 @@ public class PlayerMovement: MonoBehaviour
         if (transform.position.y < GameManager.Instance.DeathHeight)
         {
             GameManager.Instance.IsGameOver = true;
+            AudioManager.instance.PlaySFX(1);
         }
     }
     
@@ -45,6 +46,7 @@ public class PlayerMovement: MonoBehaviour
         {
             GameManager.Instance.CoinCount++;
             Destroy(other.gameObject);
+            AudioManager.instance.PlaySFX(0);
         }
     }
 }
