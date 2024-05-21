@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
     private float _timer;
     private float _timerCycle = 0f;
     [SerializeField] private float cycle = 2f;
-    [SerializeField] private float forwardTimer = 0f;
+    public float forwardTimer = 0f;
 
     [Header("State")]
     private int _currentState;
@@ -94,6 +94,7 @@ public class Timer : MonoBehaviour
         {
             // Stop Timer
             _timer = 0;
+            forwardTimer = 0;
             currentState = 0;
             swayGauge = 0; // Reset the sway gauge when the key is released
         }
