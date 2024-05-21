@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.5939551, g: 0.6469297, b: 0.78113204, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: f15c336556dd74f40aaca655f7767970, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 7f98e7ff226cc8c449a7da08501e09b5, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.99642366, g: 0.8711446, b: 0.7254693, a: 1}
+  m_IndirectSpecularColor: {r: 0.6669789, g: 0.6384152, b: 0.688433, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1210,7 +1210,7 @@ MonoBehaviour:
   - {fileID: 5919628437899205411, guid: b1483bb2c42f4684d9b484d21a64030b, type: 3}
   - {fileID: 6905499868047155115, guid: 4d533f82fbdee0347a2897fed0f3909c, type: 3}
   - {fileID: 6905499868047155115, guid: 4d533f82fbdee0347a2897fed0f3909c, type: 3}
-  - {fileID: 8972641570548630881, guid: bfdd71d3fc8b9104481403686095e02d, type: 3}
+  - {fileID: 854001944274052560, guid: b38a80827ca3f1b47ba27d1021b67ee2, type: 3}
   swayDegree: 0
   _timer: {fileID: 835678316}
   swayAmount: 0.2
@@ -2505,7 +2505,7 @@ PrefabInstance:
     - target: {fileID: 5875252266930921119, guid: b1483bb2c42f4684d9b484d21a64030b, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4300462, guid: 353b40c6a1ff7dd469b9d1e4dc0f13a8, type: 3}
+      objectReference: {fileID: 4300320, guid: 353b40c6a1ff7dd469b9d1e4dc0f13a8, type: 3}
     - target: {fileID: 5919628437899205411, guid: b1483bb2c42f4684d9b484d21a64030b, type: 3}
       propertyPath: m_Name
       value: BasicRoad
@@ -3780,7 +3780,7 @@ MonoBehaviour:
   - {fileID: 5919628437899205411, guid: b1483bb2c42f4684d9b484d21a64030b, type: 3}
   - {fileID: 6905499868047155115, guid: 4d533f82fbdee0347a2897fed0f3909c, type: 3}
   - {fileID: 6905499868047155115, guid: 4d533f82fbdee0347a2897fed0f3909c, type: 3}
-  - {fileID: 8972641570548630881, guid: bfdd71d3fc8b9104481403686095e02d, type: 3}
+  - {fileID: 854001944274052560, guid: b38a80827ca3f1b47ba27d1021b67ee2, type: 3}
   swayDegree: 0
   _timer: {fileID: 835678316}
   swayAmount: 0.2
@@ -3949,7 +3949,7 @@ MonoBehaviour:
   - {fileID: 5919628437899205411, guid: b1483bb2c42f4684d9b484d21a64030b, type: 3}
   - {fileID: 6905499868047155115, guid: 4d533f82fbdee0347a2897fed0f3909c, type: 3}
   - {fileID: 6905499868047155115, guid: 4d533f82fbdee0347a2897fed0f3909c, type: 3}
-  - {fileID: 8972641570548630881, guid: bfdd71d3fc8b9104481403686095e02d, type: 3}
+  - {fileID: 854001944274052560, guid: b38a80827ca3f1b47ba27d1021b67ee2, type: 3}
   swayDegree: 0
   _timer: {fileID: 835678316}
   swayAmount: 0.2
@@ -4314,7 +4314,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257137345}
-  m_Mesh: {fileID: 4300472, guid: 353b40c6a1ff7dd469b9d1e4dc0f13a8, type: 3}
+  m_Mesh: {fileID: 4300320, guid: 353b40c6a1ff7dd469b9d1e4dc0f13a8, type: 3}
 --- !u!1 &1259061341
 GameObject:
   m_ObjectHideFlags: 0
@@ -6618,7 +6618,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975091576}
-  m_Mesh: {fileID: 4300472, guid: 353b40c6a1ff7dd469b9d1e4dc0f13a8, type: 3}
+  m_Mesh: {fileID: 4300320, guid: 353b40c6a1ff7dd469b9d1e4dc0f13a8, type: 3}
 --- !u!4 &1975091580
 Transform:
   m_ObjectHideFlags: 0
@@ -6848,7 +6848,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020403571}
-  m_Mesh: {fileID: 4300472, guid: 353b40c6a1ff7dd469b9d1e4dc0f13a8, type: 3}
+  m_Mesh: {fileID: 4300320, guid: 353b40c6a1ff7dd469b9d1e4dc0f13a8, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
