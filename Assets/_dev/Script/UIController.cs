@@ -24,8 +24,6 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text finalCoinCountText;
     [SerializeField] private TMP_Text highScoreText;
 
-    
-
     public void ChangeUIPanel(GameState state)
     {
         TurnOffAllPanel();
@@ -58,6 +56,7 @@ public class UIController : MonoBehaviour
         ChangeUIPanel(GameState.GameStart);
         quitBtn.onClick.AddListener(OnClickQuitBtn);
         restartBtn.onClick.AddListener(OnClickRestartBtn);
+        // Commented out to prevent immediate state change
         OnClickStartBtn();
         highScore = PlayerPrefs.GetInt("HighScore", 0); 
     }
@@ -70,12 +69,19 @@ public class UIController : MonoBehaviour
 
     private void OnClickRestartBtn()
     {
+        Debug.Log("Restart button clicked");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void OnClickQuitBtn()
+    {
+        Debug.Log("Quit button clicked");
+        Application.Quit(); // Quit the application
     }
 
     public void ChangeCoinText()
     {
-        coinCountText.text = $"Score: {GameManager.Instance.CoinCount}";
+        coinCountText.text = $"{GameManager.Instance.CoinCount}";
         finalCoinCountText.text = coinCountText.text;
 
         // Update high score if the current score is higher
@@ -86,12 +92,9 @@ public class UIController : MonoBehaviour
             UpdateHighScoreText(); // Update high score text
         }
     }
+
     private void UpdateHighScoreText()
     {
         highScoreText.text = $"High Score: {highScore}";
-    }
-    private void OnClickQuitBtn()
-    {
-        Application.Quit(); // Quit the application
     }
 }

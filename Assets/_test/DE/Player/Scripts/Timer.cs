@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
@@ -39,6 +40,13 @@ public class Timer : MonoBehaviour
     
     public event Action<float> OnGaugeChangedAction;
 
+    [Header("UI Elements")]
+    [SerializeField] private Image gaugeFill; // Reference to the UI Image component for the fill gauge
+
+    [Header("Settings")]
+    [SerializeField] private float maxSwayGauge = 100f; // The maximum value of the sway gauge
+    [SerializeField] private float swayMultiplier = 10f; // Multiplier to control the speed of sway gauge increase
+
     private void Awake()
     {
         if (Instance == null)
@@ -54,6 +62,7 @@ public class Timer : MonoBehaviour
     private void Update()
     {
         GameTimer();
+        UpdateGaugeFill();
     }
 
     private void GameTimer()
@@ -67,7 +76,12 @@ public class Timer : MonoBehaviour
             forwardTimer = (int)_timer % 60;
 
             // Increase the sway gauge based on how long the key is pressed
-            swayGauge += Time.deltaTime * 5; // Increase multiplier to make it spin faster
+            swayGauge += Time.deltaTime * swayMultiplier; // Increase multiplier to make it increase faster
+
+            if (swayGauge > maxSwayGauge)
+            {
+                swayGauge = maxSwayGauge; // Clamp the sway gauge to its max value
+            }
 
             if (_timerCycle >= cycle)
             {
@@ -82,6 +96,15 @@ public class Timer : MonoBehaviour
             _timer = 0;
             currentState = 0;
             swayGauge = 0; // Reset the sway gauge when the key is released
+        }
+    }
+
+    private void UpdateGaugeFill()
+    {
+        if (gaugeFill != null)
+        {
+            // Normalize swayGauge to [0, 1] range
+            gaugeFill.fillAmount = Mathf.Clamp01(swayGauge / maxSwayGauge);
         }
     }
 }

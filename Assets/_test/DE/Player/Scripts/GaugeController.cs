@@ -1,31 +1,30 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GaugeController : MonoBehaviour
+public class FillGaugeController : MonoBehaviour
 {
-    [SerializeField] private RectTransform needleRectTransform;
-    [SerializeField] private Timer timer;
+    public Image gaugeFill; // Reference to the UI Image component that represents the fill
 
-    [SerializeField] private float maxRotation = 180f; // The range of rotation from 90 to -90 degrees
-    [SerializeField] private float initialRotation = 90f; // Initial rotation offset
-    //[SerializeField] private float rotationSpeedMultiplier = 2f; // Multiplier to make it spin faster
+    public float swayDuration = 5.0f; // Duration in seconds for one complete sway cycle
+    private float elapsedTime = 0.0f;
 
-    private void Start()
+    void Start()
     {
-        if (timer != null)
+        if (gaugeFill == null)
         {
-            timer.OnGaugeChangedAction += UpdateNeedle;
+            Debug.LogError("Gauge Fill image is not assigned.");
         }
-
-        // Set the initial rotation of the needle
-        needleRectTransform.localRotation = Quaternion.Euler(0, 0, initialRotation);
     }
 
-    private void UpdateNeedle(float gaugeValue)
+    void Update()
     {
-        // Assuming gaugeValue ranges from 0 to some maximum value
-        float clampedValue = Mathf.Clamp01(gaugeValue / 10f); // Adjust the divisor to scale gaugeValue appropriately
-        float rotation = Mathf.Clamp(initialRotation - (clampedValue * maxRotation), -90f, 90f);// Subtract to rotate from 90 to -90
-        needleRectTransform.localRotation = Quaternion.Euler(0, 0, rotation); // Rotate needle based on gauge value
+        // Update the elapsed time
+        elapsedTime += Time.deltaTime;
+
+        // Calculate the fill amount based on elapsed time and sway duration
+        float fillAmount = Mathf.PingPong(elapsedTime / swayDuration, 1.0f);
+
+        // Update the UI fill amount
+        gaugeFill.fillAmount = fillAmount;
     }
 }
